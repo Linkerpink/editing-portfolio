@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dyel6bnhhe6or"]
+
+[ext_resource type="Script" uid="uid://dskomrvgw64nl" path="res://scripts/wii_u_cursor.gd" id="2_2g4t1"]
+[ext_resource type="Texture2D" uid="uid://b6uvxx7sd67rm" path="res://assets/sprites/cursor/CursorShadow.png" id="2_h880h"]
+
+[sub_resource type="Animation" id="Animation_h880h"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_2g4t1"]
+resource_name = "show"
+length = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h880h"]
+_data = {
+&"RESET": SubResource("Animation_h880h"),
+&"show": SubResource("Animation_2g4t1")
+}
+
+[node name="WiiUCursor" type="CanvasLayer" unique_id=1744566049 groups=["wii_u_cursor"]]
+layer = 999
+script = ExtResource("2_2g4t1")
+
+[node name="CursorControl" type="Control" parent="." unique_id=453187326]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+
+[node name="CursorVisual" type="Control" parent="CursorControl" unique_id=1971667586]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CursorShadow" type="TextureRect" parent="CursorControl/CursorVisual" unique_id=1005518970]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_h880h")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CursorControl/CursorVisual" unique_id=766917502]
+root_node = NodePath("../../..")
+libraries/ = SubResource("AnimationLibrary_h880h")

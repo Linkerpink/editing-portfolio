@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://dyel6bnhhe6or"]
+
+[ext_resource type="Script" uid="uid://dskomrvgw64nl" path="res://scripts/wii_u_cursor.gd" id="2_2g4t1"]
+[ext_resource type="Texture2D" uid="uid://b6uvxx7sd67rm" path="res://assets/sprites/cursor/normal/CursorShadow.png" id="2_h880h"]
+[ext_resource type="Texture2D" uid="uid://com5r11t8uoqv" path="res://assets/sprites/cursor/normal/CursorOutline2.png" id="3_htcxu"]
+[ext_resource type="Texture2D" uid="uid://ughbh3vsn5t3" path="res://assets/sprites/cursor/normal/CursorBody.png" id="3_rtnwd"]
+[ext_resource type="Texture2D" uid="uid://d1q7kdt6cl8gp" path="res://assets/sprites/cursor/normal/CursorOutline1.png" id="4_4f3bx"]
+[ext_resource type="Texture2D" uid="uid://crfa6x8qei64k" path="res://assets/sprites/cursor/normal/CursorOutline3.png" id="4_56abs"]
+[ext_resource type="Texture2D" uid="uid://c8uegnlx5lo6" path="res://assets/sprites/cursor/normal/CursorOutline4.png" id="5_f3wix"]
+[ext_resource type="Texture2D" uid="uid://c0pbu37nqmsjv" path="res://assets/sprites/cursor/grab/CursorGrabBody.png" id="8_4obe6"]
+[ext_resource type="Texture2D" uid="uid://cq3xbhdwnqbfk" path="res://assets/sprites/cursor/grab/CursorGrabOutline2.png" id="9_v4p5o"]
+[ext_resource type="Texture2D" uid="uid://dvtp5amx3av1x" path="res://assets/sprites/cursor/grab/CursorGrabOutline3.png" id="10_7oxfy"]
+[ext_resource type="Texture2D" uid="uid://dnmstkna6byui" path="res://assets/sprites/cursor/grab/CursorGrabOutline4.png" id="11_x3xka"]
+[ext_resource type="Texture2D" uid="uid://g4lh2y3o68k5" path="res://assets/sprites/cursor/grab/CursorGrabOutline1.png" id="12_wqt17"]
+[ext_resource type="Texture2D" uid="uid://bo87ixthey8f8" path="res://assets/sprites/cursor/grab/CursorGrabShadow.png" id="13_0dg0s"]
+
+[sub_resource type="Animation" id="Animation_h880h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CursorControl/CursorVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2g4t1"]
+resource_name = "show"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CursorControl/CursorVisual:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h880h"]
+_data = {
+&"RESET": SubResource("Animation_h880h"),
+&"show": SubResource("Animation_2g4t1")
+}
+
+[node name="WiiUCursor" type="CanvasLayer" unique_id=1744566049 groups=["wii_u_cursor"]]
+layer = 999
+script = ExtResource("2_2g4t1")
+cursor_colors = Array[Color]([Color(0, 0.54901963, 1, 1), Color(1, 0.2509804, 0.2, 1), Color(0, 0.6509804, 0.37254903, 1), Color(1, 0.7019608, 0, 1)])
+cursor_textures = Array[CompressedTexture2D]([ExtResource("2_h880h"), ExtResource("3_rtnwd"), ExtResource("4_4f3bx"), ExtResource("3_htcxu"), ExtResource("4_56abs"), ExtResource("5_f3wix"), ExtResource("13_0dg0s"), ExtResource("8_4obe6"), ExtResource("12_wqt17"), ExtResource("9_v4p5o"), ExtResource("10_7oxfy"), ExtResource("11_x3xka")])
+
+[node name="CursorControl" type="Control" parent="." unique_id=453187326]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+mouse_filter = 2
+
+[node name="CursorVisual" type="Control" parent="CursorControl" unique_id=1971667586]
+layout_mode = 1
+anchors_preset = 0
+offset_left = -22.0
+offset_top = -7.0
+offset_right = 42.0
+offset_bottom = 57.0
+mouse_filter = 2
+
+[node name="CursorShadow" type="TextureRect" parent="CursorControl/CursorVisual" unique_id=1005518970]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_h880h")
+expand_mode = 1
+
+[node name="CursorBody" type="TextureRect" parent="CursorControl/CursorVisual" unique_id=1819708940]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_rtnwd")
+expand_mode = 1
+
+[node name="CursorOutline" type="TextureRect" parent="CursorControl/CursorVisual" unique_id=1088438553]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_4f3bx")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CursorControl/CursorVisual" unique_id=766917502]
+root_node = NodePath("../../..")
+libraries/ = SubResource("AnimationLibrary_h880h")

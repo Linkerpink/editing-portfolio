@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://djsxf1w82l0vx"]
+
+[ext_resource type="Script" uid="uid://byd4imdkciaw5" path="res://scripts/globals.gd" id="1_vyosl"]
+
+[node name="Globals" type="Node" unique_id=695158319]
+script = ExtResource("1_vyosl")
+
+[node name="MouseTimer" type="Timer" parent="." unique_id=1696925057]
+wait_time = 2.0
+
+[connection signal="timeout" from="MouseTimer" to="." method="_on_mouse_timer_timeout"]
