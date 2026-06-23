@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b85fu6ytk3oyy" path="res://scenes/wii_u_button.tscn" id="1_7gavv"]
 [ext_resource type="Texture2D" uid="uid://cwme8u6ahw61y" path="res://icon.svg" id="2_fetu5"]
+[ext_resource type="PackedScene" uid="uid://ddmmk3og2wfm" path="res://assets/models/Plaza.glb" id="3_hn6pk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_krot7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -11,8 +12,10 @@ ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
 sky_material = SubResource("ProceduralSkyMaterial_krot7")
 
 [sub_resource type="Environment" id="Environment_w18ys"]
-background_mode = 2
+background_mode = 1
+background_color = Color(1, 1, 1, 1)
 sky = SubResource("Sky_u4wd2")
+ambient_light_source = 3
 
 [node name="Home" type="Node3D" unique_id=1035791948]
 
@@ -24,6 +27,8 @@ shadow_enabled = true
 environment = SubResource("Environment_w18ys")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=769035]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 5)
+fov = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1619649296]
 
@@ -64,3 +69,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_fetu5")
 expand_mode = 1
+
+[node name="Plaza" parent="." unique_id=1751227422 instance=ExtResource("3_hn6pk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23)
