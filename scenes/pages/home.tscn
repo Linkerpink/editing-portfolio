@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://y4jd5ap1ocvs"]
 
 [ext_resource type="PackedScene" uid="uid://b85fu6ytk3oyy" path="res://scenes/wii_u_button.tscn" id="1_7gavv"]
-[ext_resource type="Texture2D" uid="uid://cwme8u6ahw61y" path="res://icon.svg" id="2_fetu5"]
+[ext_resource type="Shader" uid="uid://hq238dkinu5i" path="res://shaders/liquid_glass.gdshader" id="1_wfd65"]
 [ext_resource type="PackedScene" uid="uid://ddmmk3og2wfm" path="res://assets/models/Plaza.glb" id="3_hn6pk"]
+[ext_resource type="Texture2D" uid="uid://bm14mlhhsqq5q" path="res://assets/sprites/linkerpink 4k.png" id="3_wfd65"]
+[ext_resource type="PackedScene" uid="uid://gs4bc5pk6mmf" path="res://assets/models/FloatIcon00.fbx" id="4_nwrmk"]
+[ext_resource type="Script" uid="uid://3evrbvr32y63" path="res://scripts/float_icons.gd" id="5_4yxid"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_krot7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -13,9 +16,24 @@ sky_material = SubResource("ProceduralSkyMaterial_krot7")
 
 [sub_resource type="Environment" id="Environment_w18ys"]
 background_mode = 1
-background_color = Color(1, 1, 1, 1)
+background_color = Color(0.84313726, 0.8784314, 0.85882354, 1)
 sky = SubResource("Sky_u4wd2")
 ambient_light_source = 3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwrmk"]
+shader = ExtResource("1_wfd65")
+shader_parameter/blur = 3.5
+shader_parameter/warp_intensity = 0.4
+shader_parameter/strength_x = 12.0
+shader_parameter/strength_y = 12.0
+shader_parameter/offset_x = 0.0
+shader_parameter/offset_y = 0.0
+shader_parameter/corner_radius = 0.0
+shader_parameter/edge_smoothness = 1.0
+shader_parameter/tint = Color(0.95, 0.97, 1, 0.12)
+shader_parameter/edge_highlight = Color(1, 1, 1, 0.3)
+shader_parameter/edge_width = 1.5
+shader_parameter/chromatic_strength = 1.0000000475
 
 [node name="Home" type="Node3D" unique_id=1035791948]
 
@@ -30,6 +48,11 @@ environment = SubResource("Environment_w18ys")
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 5)
 fov = 40.0
 
+[node name="Camera3D2" type="Camera3D" parent="." unique_id=1897638841]
+transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 6.065815e-06, 46.172386, 5)
+current = true
+fov = 40.0
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1619649296]
 
 [node name="HomeUI" type="Control" parent="CanvasLayer" unique_id=1311412287]
@@ -40,8 +63,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/HomeUI" unique_id=689759777]
+material = SubResource("ShaderMaterial_nwrmk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="WiiUButton" parent="CanvasLayer/HomeUI" unique_id=1509840948 instance=ExtResource("1_7gavv")]
-layout_mode = 0
+layout_mode = 1
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
@@ -49,8 +81,8 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 offset_left = 32.0
 offset_top = 32.0
-offset_right = 96.0
-offset_bottom = 96.0
+offset_right = 124.0
+offset_bottom = 124.0
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -61,14 +93,21 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 24.0
-offset_bottom = 24.0
+offset_left = -36.0
+offset_top = -36.0
+offset_right = 36.0
+offset_bottom = 36.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_fetu5")
+texture = ExtResource("3_wfd65")
 expand_mode = 1
 
 [node name="Plaza" parent="." unique_id=1751227422 instance=ExtResource("3_hn6pk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23)
+
+[node name="FloatIcons" type="Node3D" parent="." unique_id=400797670]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 50, 25)
+script = ExtResource("5_4yxid")
+
+[node name="FloatIcon00" parent="FloatIcons" unique_id=1630529641 instance=ExtResource("4_nwrmk")]
+transform = Transform3D(0.83560336, 0.5493333, 0, -0.4730077, 0.7195028, -0.508507, -0.27933982, 0.42491016, 0.8610578, 0, 0, 9.727837)

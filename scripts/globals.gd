@@ -15,6 +15,7 @@ func _input(event):
 
 
 func _on_mouse_timer_timeout() -> void:
-	# Disable cursor
-	using_mouse = false
-	WiiUCursor.show_cursor(false)
+	if using_mouse:
+		# Disable cursor
+		using_mouse = false
+		WiiUCursor.show_cursor(false)
