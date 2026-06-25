@@ -51,7 +51,7 @@ _data = {
 &"show": SubResource("Animation_2g4t1")
 }
 
-[node name="WiiUCursor" type="CanvasLayer" unique_id=1744566049 groups=["wii_u_cursor"]]
+[node name="WiiUCursor" type="CanvasLayer" unique_id=1744566049]
 layer = 999
 script = ExtResource("2_2g4t1")
 cursor_colors = Array[Color]([Color(0, 0.54901963, 1, 1), Color(1, 0.2509804, 0.2, 1), Color(0, 0.6509804, 0.37254903, 1), Color(1, 0.7019608, 0, 1)])

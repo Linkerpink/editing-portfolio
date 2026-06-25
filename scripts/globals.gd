@@ -1,7 +1,8 @@
 extends Node
 
-var using_mouse : bool = false
 @onready var mouse_timer : Timer = $MouseTimer
+var using_mouse : bool = false
+var selected_button : Control
 
 
 func _input(event):
@@ -12,6 +13,10 @@ func _input(event):
 		
 		using_mouse = true
 		mouse_timer.start()
+
+
+func select_button(_button : Control):
+	selected_button = _button
 
 
 func _on_mouse_timer_timeout() -> void:

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b85fu6ytk3oyy"]
 
 [ext_resource type="Shader" uid="uid://hq238dkinu5i" path="res://shaders/liquid_glass.gdshader" id="1_8e8e8"]
+[ext_resource type="Script" uid="uid://bvayikcetv7ao" path="res://scripts/wii_u_button.gd" id="2_s0ady"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_krot7"]
 shader = ExtResource("1_8e8e8")
@@ -19,6 +20,7 @@ shader_parameter/chromatic_strength = 5.0
 
 [node name="WiiUButton" type="Button" unique_id=1509840948]
 material = SubResource("ShaderMaterial_krot7")
+custom_minimum_size = Vector2(92, 92)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -30,3 +32,8 @@ offset_right = 46.0
 offset_bottom = 46.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(46, 46)
+script = ExtResource("2_s0ady")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

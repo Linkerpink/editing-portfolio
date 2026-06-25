@@ -87,6 +87,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/HomeUI/WiiUButton" unique_id=1055318170]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -101,6 +102,81 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_wfd65")
 expand_mode = 1
+
+[node name="FlowContainer" type="FlowContainer" parent="CanvasLayer/HomeUI" unique_id=2072376939]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 181.33325
+offset_top = 102.0
+offset_right = -181.66675
+offset_bottom = -102.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+alignment = 1
+
+[node name="WiiUButton" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=1858816397 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton2" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=1588184320 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton3" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=200261750 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton4" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=139991645 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton5" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=800400085 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton6" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=687773122 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton7" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=344720365 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton8" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=953620816 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton9" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=1080171381 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton10" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=990921086 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton11" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=1724021276 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton12" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=755602531 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton13" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=12860175 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton14" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=526165297 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="WiiUButton15" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=87879866 instance=ExtResource("1_7gavv")]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
 
 [node name="Plaza" parent="." unique_id=1751227422 instance=ExtResource("3_hn6pk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23)
