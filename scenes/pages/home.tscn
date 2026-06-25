@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://y4jd5ap1ocvs"]
 
 [ext_resource type="PackedScene" uid="uid://b85fu6ytk3oyy" path="res://scenes/wii_u_button.tscn" id="1_7gavv"]
+[ext_resource type="Script" uid="uid://bekrts5xou5gj" path="res://scripts/main.gd" id="1_phgpt"]
 [ext_resource type="Shader" uid="uid://hq238dkinu5i" path="res://shaders/liquid_glass.gdshader" id="1_wfd65"]
 [ext_resource type="PackedScene" uid="uid://ddmmk3og2wfm" path="res://assets/models/Plaza.glb" id="3_hn6pk"]
 [ext_resource type="Texture2D" uid="uid://bm14mlhhsqq5q" path="res://assets/sprites/linkerpink 4k.png" id="3_wfd65"]
@@ -20,6 +21,91 @@ background_color = Color(0.84313726, 0.8784314, 0.85882354, 1)
 sky = SubResource("Sky_u4wd2")
 ambient_light_source = 3
 
+[sub_resource type="Animation" id="Animation_nnlnn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.1415925, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(6.065815e-06, 46.172386, 5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:fov")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [40.0]
+}
+
+[sub_resource type="Animation" id="Animation_phgpt"]
+resource_name = "show_plaza"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.13, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 3.1415925, 0), Vector3(-1.3089969, 3.1415927, 0), Vector3(0.61086524, 0, 0), Vector3(-0.5235988, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.13, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(6.065815e-06, 46.172386, 5), Vector3(6.065815e-06, 46.172386, 5), Vector3(0, 5, 5), Vector3(0, 5, 5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:fov")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.13, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [40.0, 30.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nnlnn"]
+_data = {
+&"RESET": SubResource("Animation_nnlnn"),
+&"show_plaza": SubResource("Animation_phgpt")
+}
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nwrmk"]
 shader = ExtResource("1_wfd65")
 shader_parameter/blur = 3.5
@@ -35,7 +121,45 @@ shader_parameter/edge_highlight = Color(1, 1, 1, 0.3)
 shader_parameter/edge_width = 1.5
 shader_parameter/chromatic_strength = 1.0000000475
 
-[node name="Home" type="Node3D" unique_id=1035791948]
+[sub_resource type="Animation" id="Animation_ri4wu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%HomeUI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_cc3sv"]
+resource_name = "show_plaza"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%HomeUI:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -720)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ri4wu"]
+_data = {
+&"RESET": SubResource("Animation_ri4wu"),
+&"show_plaza": SubResource("Animation_cc3sv")
+}
+
+[node name="Main" type="Node3D" unique_id=1035791948]
+script = ExtResource("1_phgpt")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1806450106]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
@@ -44,18 +168,17 @@ shadow_enabled = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1756347179]
 environment = SubResource("Environment_w18ys")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=769035]
-transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 5, 5)
-fov = 40.0
-
-[node name="Camera3D2" type="Camera3D" parent="." unique_id=1897638841]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1897638841]
 transform = Transform3D(-1, 0, 1.509958e-07, 0, 1, 0, -1.509958e-07, 0, -1, 6.065815e-06, 46.172386, 5)
 current = true
 fov = 40.0
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D" unique_id=1113659517]
+libraries/ = SubResource("AnimationLibrary_nnlnn")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1619649296]
 
-[node name="HomeUI" type="Control" parent="CanvasLayer" unique_id=1311412287]
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=1757813830]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -63,7 +186,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/HomeUI" unique_id=689759777]
+[node name="HomeUI" type="Control" parent="CanvasLayer/UI" unique_id=1311412287]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/UI/HomeUI" unique_id=689759777]
 material = SubResource("ShaderMaterial_nwrmk")
 layout_mode = 1
 anchors_preset = 15
@@ -72,7 +204,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WiiUButton" parent="CanvasLayer/HomeUI" unique_id=1509840948 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton" parent="CanvasLayer/UI/HomeUI" unique_id=1509840948 instance=ExtResource("1_7gavv")]
 layout_mode = 1
 anchors_preset = 0
 anchor_left = 0.0
@@ -86,7 +218,7 @@ offset_bottom = 124.0
 grow_horizontal = 1
 grow_vertical = 1
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/HomeUI/WiiUButton" unique_id=1055318170]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UI/HomeUI/WiiUButton" unique_id=1055318170]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -103,7 +235,7 @@ grow_vertical = 2
 texture = ExtResource("3_wfd65")
 expand_mode = 1
 
-[node name="FlowContainer" type="FlowContainer" parent="CanvasLayer/HomeUI" unique_id=2072376939]
+[node name="FlowContainer" type="FlowContainer" parent="CanvasLayer/UI/HomeUI" unique_id=2072376939]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -118,65 +250,83 @@ theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 alignment = 1
 
-[node name="WiiUButton" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=1858816397 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=1858816397 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton2" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=1588184320 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton2" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=1588184320 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton3" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=200261750 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton3" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=200261750 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton4" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=139991645 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton4" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=139991645 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton5" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=800400085 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton5" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=800400085 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton6" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=687773122 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton6" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=687773122 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton7" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=344720365 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton7" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=344720365 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton8" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=953620816 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton8" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=953620816 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton9" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=1080171381 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton9" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=1080171381 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton10" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=990921086 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton10" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=990921086 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton11" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=1724021276 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton11" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=1724021276 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton12" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=755602531 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton12" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=755602531 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton13" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=12860175 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton13" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=12860175 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton14" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=526165297 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton14" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=526165297 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
 
-[node name="WiiUButton15" parent="CanvasLayer/HomeUI/FlowContainer" unique_id=87879866 instance=ExtResource("1_7gavv")]
+[node name="WiiUButton15" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=87879866 instance=ExtResource("1_7gavv")]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
+
+[node name="ViewSwitchButton" parent="CanvasLayer/UI" unique_id=755906892 instance=ExtResource("1_7gavv")]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -92.0
+offset_top = -92.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(92, 92)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UI" unique_id=1055639479]
+libraries/ = SubResource("AnimationLibrary_ri4wu")
 
 [node name="Plaza" parent="." unique_id=1751227422 instance=ExtResource("3_hn6pk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23)
@@ -187,3 +337,5 @@ script = ExtResource("5_4yxid")
 
 [node name="FloatIcon00" parent="FloatIcons" unique_id=1630529641 instance=ExtResource("4_nwrmk")]
 transform = Transform3D(0.83560336, 0.5493333, 0, -0.4730077, 0.7195028, -0.508507, -0.27933982, 0.42491016, 0.8610578, 0, 0, 9.727837)
+
+[connection signal="pressed" from="CanvasLayer/UI/ViewSwitchButton" to="." method="switch_view"]
