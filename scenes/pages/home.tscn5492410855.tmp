@@ -85,7 +85,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.125, 0.13, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(6.065815e-06, 46.172386, 5), Vector3(6.065815e-06, 46.172386, 5), Vector3(0, 5, 5), Vector3(0, 5, 0)]
+"values": [Vector3(6.065815e-06, 46.172386, 5), Vector3(6.065815e-06, 46.172386, 5), Vector3(0, 5, 5), Vector3(0, 5, 5)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -160,7 +160,6 @@ _data = {
 
 [node name="Main" type="Node3D" unique_id=1035791948]
 script = ExtResource("1_phgpt")
-cam_bounds = 5
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1806450106]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
