@@ -3,10 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://b85fu6ytk3oyy" path="res://scenes/wii_u_button.tscn" id="1_7gavv"]
 [ext_resource type="Script" uid="uid://bekrts5xou5gj" path="res://scripts/main.gd" id="1_phgpt"]
 [ext_resource type="Shader" uid="uid://hq238dkinu5i" path="res://shaders/liquid_glass.gdshader" id="1_wfd65"]
+[ext_resource type="Theme" uid="uid://c3ardofqloevr" path="res://themes/theme.tres" id="2_cc3sv"]
 [ext_resource type="PackedScene" uid="uid://ddmmk3og2wfm" path="res://assets/models/Plaza.glb" id="3_hn6pk"]
 [ext_resource type="Texture2D" uid="uid://bm14mlhhsqq5q" path="res://assets/sprites/linkerpink 4k.png" id="3_wfd65"]
 [ext_resource type="PackedScene" uid="uid://gs4bc5pk6mmf" path="res://assets/models/FloatIcon00.fbx" id="4_nwrmk"]
 [ext_resource type="Script" uid="uid://3evrbvr32y63" path="res://scripts/float_icons.gd" id="5_4yxid"]
+[ext_resource type="Texture2D" uid="uid://cs8xm4f0gp0wx" path="res://assets/sprites/Warawaraplaza.png" id="5_nnlnn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_krot7"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -70,7 +72,7 @@ tracks/0/path = NodePath(".:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.13, 0.25),
+"times": PackedFloat32Array(0, 0.12833335, 0.13333334, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 3.1415925, 0), Vector3(-1.3089969, 3.1415927, 0), Vector3(0.61086524, 0, 0), Vector3(-0.5235988, 0, 0)]
@@ -82,7 +84,7 @@ tracks/1/path = NodePath(".:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.13, 0.25),
+"times": PackedFloat32Array(0, 0.12833335, 0.13333334, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(6.065815e-06, 46.172386, 5), Vector3(6.065815e-06, 46.172386, 5), Vector3(0, 5, 5), Vector3(0, 5, 0)]
@@ -94,7 +96,7 @@ tracks/2/path = NodePath(".:fov")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.13, 0.25),
+"times": PackedFloat32Array(0.13333334, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [40.0, 30.0]
@@ -121,6 +123,66 @@ shader_parameter/edge_highlight = Color(1, 1, 1, 0.3)
 shader_parameter/edge_width = 1.5
 shader_parameter/chromatic_strength = 1.0000000475
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5gyxv"]
+shader = ExtResource("1_wfd65")
+shader_parameter/blur = 3.5
+shader_parameter/warp_intensity = 0.4
+shader_parameter/strength_x = 12.0
+shader_parameter/strength_y = 12.0
+shader_parameter/offset_x = 0.0
+shader_parameter/offset_y = 0.0
+shader_parameter/corner_radius = 1.0
+shader_parameter/edge_smoothness = 0.5
+shader_parameter/tint = Color(0.95, 0.97, 1, 0.12)
+shader_parameter/edge_highlight = Color(0.98039216, 0.9882353, 0.9843137, 1)
+shader_parameter/edge_width = 10.0
+shader_parameter/chromatic_strength = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cc3sv"]
+shader = ExtResource("1_wfd65")
+shader_parameter/blur = 3.5
+shader_parameter/warp_intensity = 0.4
+shader_parameter/strength_x = 12.0
+shader_parameter/strength_y = 12.0
+shader_parameter/offset_x = 0.0
+shader_parameter/offset_y = 0.0
+shader_parameter/corner_radius = 1.0
+shader_parameter/edge_smoothness = 0.5
+shader_parameter/tint = Color(0.95, 0.97, 1, 0.12)
+shader_parameter/edge_highlight = Color(0.98039216, 0.9882353, 0.9843137, 1)
+shader_parameter/edge_width = 10.0
+shader_parameter/chromatic_strength = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nnlnn"]
+shader = ExtResource("1_wfd65")
+shader_parameter/blur = 3.5
+shader_parameter/warp_intensity = 0.4
+shader_parameter/strength_x = 12.0
+shader_parameter/strength_y = 12.0
+shader_parameter/offset_x = 0.0
+shader_parameter/offset_y = 0.0
+shader_parameter/corner_radius = 1.0
+shader_parameter/edge_smoothness = 0.5
+shader_parameter/tint = Color(0.95, 0.97, 1, 0.12)
+shader_parameter/edge_highlight = Color(0.98039216, 0.9882353, 0.9843137, 1)
+shader_parameter/edge_width = 10.0
+shader_parameter/chromatic_strength = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ri4wu"]
+shader = ExtResource("1_wfd65")
+shader_parameter/blur = 3.5
+shader_parameter/warp_intensity = 0.4
+shader_parameter/strength_x = 12.0
+shader_parameter/strength_y = 12.0
+shader_parameter/offset_x = 0.0
+shader_parameter/offset_y = 0.0
+shader_parameter/corner_radius = 1.0
+shader_parameter/edge_smoothness = 0.5
+shader_parameter/tint = Color(0.95, 0.97, 1, 0.12)
+shader_parameter/edge_highlight = Color(0.98039216, 0.9882353, 0.9843137, 1)
+shader_parameter/edge_width = 10.0
+shader_parameter/chromatic_strength = 5.0
+
 [sub_resource type="Animation" id="Animation_ri4wu"]
 length = 0.001
 tracks/0/type = "value"
@@ -135,6 +197,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Plaza UI:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_cc3sv"]
 resource_name = "show_plaza"
@@ -143,13 +217,25 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("%HomeUI:position")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -720)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Plaza UI:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 720), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ri4wu"]
@@ -186,9 +272,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_cc3sv")
 
 [node name="HomeUI" type="Control" parent="CanvasLayer/UI" unique_id=1311412287]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -298,6 +386,86 @@ layout_mode = 2
 [node name="WiiUButton15" parent="CanvasLayer/UI/HomeUI/FlowContainer" unique_id=1309337281 instance=ExtResource("1_7gavv")]
 layout_mode = 2
 
+[node name="Plaza UI" type="Control" parent="CanvasLayer/UI" unique_id=496404918]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 0.0021972656
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ZoomButtonsHolder" type="HBoxContainer" parent="CanvasLayer/UI/Plaza UI" unique_id=1025020691]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = -66.00018
+offset_right = 304.0
+offset_bottom = -18.000183
+grow_vertical = 0
+theme_override_constants/separation = 23
+
+[node name="WiiUButton" parent="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder" unique_id=11558020 instance=ExtResource("1_7gavv")]
+material = SubResource("ShaderMaterial_5gyxv")
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+shader_material = SubResource("ShaderMaterial_5gyxv")
+selectable = false
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder/WiiUButton" unique_id=1441777704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -6.002014
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.38928655, 0.38928664, 0.38928658, 1)
+theme_override_font_sizes/font_size = 32
+text = "-"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="WiiUButton2" parent="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder" unique_id=913812317 instance=ExtResource("1_7gavv")]
+material = SubResource("ShaderMaterial_cc3sv")
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+shader_material = SubResource("ShaderMaterial_cc3sv")
+selectable = false
+
+[node name="WiiUButton3" parent="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder" unique_id=1907468397 instance=ExtResource("1_7gavv")]
+material = SubResource("ShaderMaterial_nnlnn")
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+shader_material = SubResource("ShaderMaterial_nnlnn")
+selectable = false
+
+[node name="WiiUButton4" parent="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder" unique_id=748178063 instance=ExtResource("1_7gavv")]
+material = SubResource("ShaderMaterial_ri4wu")
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+shader_material = SubResource("ShaderMaterial_ri4wu")
+selectable = false
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder/WiiUButton4" unique_id=994726219]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -6.002014
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0.38928655, 0.38928664, 0.38928658, 1)
+theme_override_font_sizes/font_size = 32
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
 [node name="ViewSwitchButton" parent="CanvasLayer/UI" unique_id=755906892 instance=ExtResource("1_7gavv")]
 layout_mode = 1
 anchors_preset = 3
@@ -316,6 +484,19 @@ pivot_offset = Vector2(92, 92)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UI" unique_id=1055639479]
 libraries/ = SubResource("AnimationLibrary_ri4wu")
 
+[node name="Reference" type="TextureRect" parent="CanvasLayer/UI" unique_id=1071566282]
+visible = false
+self_modulate = Color(1, 1, 1, 0.3019608)
+z_index = -31
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_nnlnn")
+
 [node name="Plaza" parent="." unique_id=1751227422 instance=ExtResource("3_hn6pk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23)
 
@@ -326,4 +507,8 @@ script = ExtResource("5_4yxid")
 [node name="FloatIcon00" parent="FloatIcons" unique_id=1630529641 instance=ExtResource("4_nwrmk")]
 transform = Transform3D(0.83560336, 0.5493333, 0, -0.4730077, 0.7195028, -0.508507, -0.27933982, 0.42491016, 0.8610578, 0, 0, 9.727837)
 
+[connection signal="pressed" from="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder/WiiUButton" to="." method="_change_zoom" binds= [0]]
+[connection signal="pressed" from="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder/WiiUButton2" to="." method="_change_zoom" binds= [1]]
+[connection signal="pressed" from="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder/WiiUButton3" to="." method="_change_zoom" binds= [2]]
+[connection signal="pressed" from="CanvasLayer/UI/Plaza UI/ZoomButtonsHolder/WiiUButton4" to="." method="_change_zoom" binds= [3]]
 [connection signal="pressed" from="CanvasLayer/UI/ViewSwitchButton" to="." method="switch_view"]

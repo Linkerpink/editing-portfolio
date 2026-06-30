@@ -1,10 +1,16 @@
 extends Node3D
 
+# Components
 @onready var camera_animation_player : AnimationPlayer = $Camera3D/AnimationPlayer
 @onready var camera : Camera3D = $Camera3D
 @onready var home_ui : Control = %HomeUI
+@onready var plaza_ui: Control = %"Plaza UI"
 @onready var ui_animation_player : AnimationPlayer = $CanvasLayer/UI/AnimationPlayer
 
+@onready var zoom_buttons_holder: Control = $"CanvasLayer/UI/Plaza UI/ZoomButtonsHolder"
+var zoom_buttons : Array[WiiUButton]
+
+# Camera
 enum Views{
 	GamePad,
 	TV
@@ -22,13 +28,18 @@ var cam_zoom_speed = 5
 
 
 func _ready() -> void:
+	_get_components()
 	switch_view()
 
 
 func _process(delta: float) -> void:
 	_handle_camera(delta)
 	_handle_resize()
-	print(camera.position)
+
+
+func _get_components():
+	for i in zoom_buttons_holder.get_children():
+		zoom_buttons.append(i)
 
 
 func _handle_camera(delta : float):
@@ -70,12 +81,36 @@ func _handle_camera_zooming(delta : float):
 		match cam_mode:
 			0:
 				camera.fov = lerpf(camera.fov, 40, cam_zoom_speed * delta)
+				for i in zoom_buttons.size():
+					if i == 0:
+						zoom_buttons[0].turn_blue()
+					else:
+						zoom_buttons[i].turn_white()
 			1:
 				camera.fov = lerpf(camera.fov, 32.5, cam_zoom_speed * delta)
+				for i in zoom_buttons.size():
+					if i == 1:
+						zoom_buttons[i].turn_blue()
+					else:
+						zoom_buttons[i].turn_white()
 			2:
 				camera.fov = lerpf(camera.fov, 25, cam_zoom_speed * delta)
+				for i in zoom_buttons.size():
+					if i == 2:
+						zoom_buttons[i].turn_blue()
+					else:
+						zoom_buttons[i].turn_white()
 			3:
 				camera.fov = lerpf(camera.fov, 15, cam_zoom_speed * delta)
+				for i in zoom_buttons.size():
+					if i == 3:
+						zoom_buttons[i].turn_blue()
+					else:
+						zoom_buttons[i].turn_white()
+
+
+func _change_zoom(extra_arg_0: int) -> void:
+	cam_mode = extra_arg_0
 
 
 func _handle_resize():
@@ -91,10 +126,14 @@ func switch_view():
 	if current_view == Views.GamePad:
 		current_view = Views.TV
 		home_ui.visible = false
+		plaza_ui.visible = true
 		camera_animation_player.play("show_plaza")
 		ui_animation_player.play("show_plaza")
+		await get_tree().create_timer(ui_animation_player.current_animation.length()).timeout
 	else:
 		current_view = Views.GamePad
 		home_ui.visible = true
+		plaza_ui.visible = false
 		camera_animation_player.play_backwards("show_plaza")
 		ui_animation_player.play_backwards("show_plaza")
+		await get_tree().create_timer(ui_animation_player.current_animation.length()).timeout

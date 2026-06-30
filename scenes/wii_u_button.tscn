@@ -34,6 +34,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(64, 64)
 script = ExtResource("2_s0ady")
+shader_material = SubResource("ShaderMaterial_krot7")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
