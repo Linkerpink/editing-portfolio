@@ -1,0 +1,121 @@
+[gd_scene format=3 uid="uid://di3q0pe0c4ayh"]
+
+[ext_resource type="Theme" uid="uid://c3ardofqloevr" path="res://themes/theme.tres" id="1_ch7o5"]
+[ext_resource type="PackedScene" uid="uid://b85fu6ytk3oyy" path="res://scenes/wii_u_button.tscn" id="1_w713p"]
+[ext_resource type="Texture2D" uid="uid://cwme8u6ahw61y" path="res://icon.svg" id="2_mp1x8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a55mg"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="VideoButton" type="Control" unique_id=392144916]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(240, 185)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -92.0
+offset_right = 120.0
+offset_bottom = 93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ch7o5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1134956703]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 8
+
+[node name="WiiUButton" parent="VBoxContainer" unique_id=1509840948 instance=ExtResource("1_w713p")]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/WiiUButton" unique_id=1754517911]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="VBoxContainer/WiiUButton/MarginContainer" unique_id=697164377]
+clip_children = 2
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a55mg")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/WiiUButton/MarginContainer/Panel" unique_id=914520265]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_mp1x8")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=906976943]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="VideoInformation" type="VBoxContainer" parent="VBoxContainer/MarginContainer" unique_id=1793359589]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/MarginContainer/VideoInformation" unique_id=615015318]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Insane Video Title Idk"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 5
+
+[node name="ChannelInfo" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VideoInformation" unique_id=521840917]
+custom_minimum_size = Vector2(0, 28)
+layout_mode = 2
+
+[node name="ProfilePicture" type="Panel" parent="VBoxContainer/MarginContainer/VideoInformation/ChannelInfo" unique_id=320897059]
+clip_children = 2
+custom_minimum_size = Vector2(28, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VideoInformation/ChannelInfo/ProfilePicture" unique_id=245130997]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mp1x8")
+expand_mode = 1
+
+[node name="ChannelLabel" type="Label" parent="VBoxContainer/MarginContainer/VideoInformation/ChannelInfo" unique_id=837367086]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 14
+text = "@ChannnelName"
+vertical_alignment = 1
+clip_text = true
+text_overrun_behavior = 5
