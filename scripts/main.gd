@@ -1,11 +1,14 @@
 extends Node3D
 class_name Main
 
+@export var animation_length = .25
+
 # Components
 @onready var camera_animation_player : AnimationPlayer = $Camera3D/AnimationPlayer
 @onready var camera : Camera3D = $Camera3D
 @onready var home_ui : Control = %HomeUI
 @onready var plaza_ui: Control = %"Plaza UI"
+@onready var video_ui: Control = %VideoUI
 @onready var ui_animation_player : AnimationPlayer = $CanvasLayer/UI/AnimationPlayer
 
 @onready var zoom_buttons_holder: Control = $"CanvasLayer/UI/Plaza UI/ZoomButtonsHolder"
@@ -33,9 +36,11 @@ var cam_zoom_speed = 5
 func _ready() -> void:
 	_get_components()
 	switch_view()
+	video_ui.hide()
 
 
 func _process(delta: float) -> void:
+	print(get_viewport().size.y)
 	_handle_input()
 	_handle_camera(delta)
 	_handle_resize()
@@ -49,8 +54,15 @@ func _get_components():
 func _handle_input():
 	if Input.is_action_just_pressed("back"):
 		if current_view == Views.Video:
-			ui_animation_player.play("hide_video")
 			current_view = Views.GamePad
+			
+			var _tween = create_tween()
+			_tween.set_trans(Tween.TRANS_QUART)
+			_tween.set_ease(Tween.EASE_IN)
+			_tween.tween_property(video_ui, "position", Vector2(0, get_viewport().size.y), animation_length)
+			
+			await get_tree().create_timer(animation_length).timeout
+			video_ui.hide()
 
 
 func _handle_camera(delta : float):
@@ -152,5 +164,11 @@ func switch_view():
 
 func instantiate_video_ui():
 	current_view = Views.Video
-	ui_animation_player.play("show_video")
 	Globals.show_video_ui.emit()
+	
+	video_ui.position.y = get_viewport().size.y
+	video_ui.show()
+	var _tween = create_tween()
+	_tween.set_trans(Tween.TRANS_QUART)
+	_tween.set_ease(Tween.EASE_OUT)
+	_tween.tween_property(video_ui, "position", Vector2.ZERO, animation_length)

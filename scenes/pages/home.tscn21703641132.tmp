@@ -497,7 +497,8 @@ texture = ExtResource("5_nnlnn")
 [node name="VideoUI" parent="CanvasLayer/UI" unique_id=1302792885 instance=ExtResource("8_5gyxv")]
 unique_name_in_owner = true
 layout_mode = 1
-metadata/_edit_use_anchors_ = true
+offset_bottom = 0.004272461
+pivot_offset_ratio = Vector2(0.5, 0.5)
 
 [node name="Plaza" parent="." unique_id=1751227422 instance=ExtResource("3_hn6pk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -23)
