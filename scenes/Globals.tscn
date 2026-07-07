@@ -6,6 +6,5 @@
 script = ExtResource("1_vyosl")
 
 [node name="MouseTimer" type="Timer" parent="." unique_id=1696925057]
-wait_time = 2.0
 
 [connection signal="timeout" from="MouseTimer" to="." method="_on_mouse_timer_timeout"]

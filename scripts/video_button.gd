@@ -20,5 +20,5 @@ func _ready() -> void:
 
 
 func _on_wii_u_button_pressed() -> void:
-	Globals.current_video = video.video_stream
+	Globals.current_video = video
 	main.instantiate_video_ui()

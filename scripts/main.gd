@@ -16,6 +16,7 @@ enum Views{
 	GamePad,
 	TV,
 	Video,
+	VideoFullscreen,
 }
 var current_view : Views = Views.TV
 

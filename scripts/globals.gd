@@ -4,7 +4,7 @@ extends Node
 
 var using_mouse : bool = false
 var selected_button : Control
-var current_video : VideoStream
+var current_video : Video
 signal show_video_ui
 signal hide_video_ui
 
