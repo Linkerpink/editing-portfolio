@@ -1,4 +1,5 @@
 extends Node3D
+class_name Main
 
 # Components
 @onready var camera_animation_player : AnimationPlayer = $Camera3D/AnimationPlayer
@@ -13,7 +14,8 @@ var zoom_buttons : Array[WiiUButton]
 # Camera
 enum Views{
 	GamePad,
-	TV
+	TV,
+	Video,
 }
 var current_view : Views = Views.TV
 
@@ -33,6 +35,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	_handle_input()
 	_handle_camera(delta)
 	_handle_resize()
 
@@ -40,6 +43,13 @@ func _process(delta: float) -> void:
 func _get_components():
 	for i in zoom_buttons_holder.get_children():
 		zoom_buttons.append(i)
+
+
+func _handle_input():
+	if Input.is_action_just_pressed("back"):
+		if current_view == Views.Video:
+			ui_animation_player.play("hide_video")
+			current_view = Views.GamePad
 
 
 func _handle_camera(delta : float):
@@ -137,3 +147,9 @@ func switch_view():
 		camera_animation_player.play_backwards("show_plaza")
 		ui_animation_player.play_backwards("show_plaza")
 		await get_tree().create_timer(ui_animation_player.current_animation.length()).timeout
+
+
+func instantiate_video_ui():
+	current_view = Views.Video
+	ui_animation_player.play("show_video")
+	Globals.show_video_ui.emit()

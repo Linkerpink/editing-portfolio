@@ -2,6 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://c3ardofqloevr" path="res://themes/theme.tres" id="1_ch7o5"]
 [ext_resource type="PackedScene" uid="uid://b85fu6ytk3oyy" path="res://scenes/wii_u_button.tscn" id="1_w713p"]
+[ext_resource type="Script" uid="uid://dwkgapdqau36r" path="res://scripts/video_button.gd" id="2_lje0q"]
 [ext_resource type="Texture2D" uid="uid://cwme8u6ahw61y" path="res://icon.svg" id="2_mp1x8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a55mg"]
@@ -33,6 +34,7 @@ offset_bottom = 93.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_ch7o5")
+script = ExtResource("2_lje0q")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1134956703]
 layout_mode = 1
@@ -43,10 +45,15 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 8
 
-[node name="WiiUButton" parent="VBoxContainer" unique_id=1509840948 instance=ExtResource("1_w713p")]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer" unique_id=1369584445]
 layout_mode = 2
+ratio = 1.77
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/WiiUButton" unique_id=1754517911]
+[node name="WiiUButton" parent="VBoxContainer/AspectRatioContainer" unique_id=1509840948 instance=ExtResource("1_w713p")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/AspectRatioContainer/WiiUButton" unique_id=1754517911]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,13 +66,14 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="Panel" type="Panel" parent="VBoxContainer/WiiUButton/MarginContainer" unique_id=697164377]
+[node name="Panel" type="Panel" parent="VBoxContainer/AspectRatioContainer/WiiUButton/MarginContainer" unique_id=697164377]
 clip_children = 2
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_a55mg")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/WiiUButton/MarginContainer/Panel" unique_id=914520265]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/AspectRatioContainer/WiiUButton/MarginContainer/Panel" unique_id=914520265]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,6 +92,7 @@ theme_override_constants/margin_right = 16
 layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="VBoxContainer/MarginContainer/VideoInformation" unique_id=615015318]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Insane Video Title Idk"
@@ -101,7 +110,8 @@ custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VideoInformation/ChannelInfo/ProfilePicture" unique_id=245130997]
+[node name="ProfilePictureTextureRect" type="TextureRect" parent="VBoxContainer/MarginContainer/VideoInformation/ChannelInfo/ProfilePicture" unique_id=245130997]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -112,10 +122,12 @@ texture = ExtResource("2_mp1x8")
 expand_mode = 1
 
 [node name="ChannelLabel" type="Label" parent="VBoxContainer/MarginContainer/VideoInformation/ChannelInfo" unique_id=837367086]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 14
 text = "@ChannnelName"
 vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 5
+
+[connection signal="pressed" from="VBoxContainer/AspectRatioContainer/WiiUButton" to="." method="_on_wii_u_button_pressed"]

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Video" format=3 uid="uid://dvv504qj5850d"]
+
+[ext_resource type="Texture2D" uid="uid://bm14mlhhsqq5q" path="res://assets/sprites/linkerpink 4k.png" id="1_536sf"]
+[ext_resource type="Script" uid="uid://osu6rwk6yxr3" path="res://scripts/video_resource.gd" id="1_jtqsx"]
+[ext_resource type="Texture2D" uid="uid://cwme8u6ahw61y" path="res://icon.svg" id="3_pnygo"]
+[ext_resource type="VideoStream" uid="uid://diomr6kcmdw7e" path="res://assets/videos/niet cooked.ogv" id="4_j6edl"]
+
+[resource]
+script = ExtResource("1_jtqsx")
+video_stream = ExtResource("4_j6edl")
+thumbnail = ExtResource("3_pnygo")
+profile_picture = ExtResource("1_536sf")
+title = "test video"
+channel_handle = "@linkerpink"
+metadata/_custom_type_script = "uid://osu6rwk6yxr3"

@@ -1,8 +1,12 @@
 extends Node
 
 @onready var mouse_timer : Timer = $MouseTimer
+
 var using_mouse : bool = false
 var selected_button : Control
+var current_video : VideoStream
+signal show_video_ui
+signal hide_video_ui
 
 
 func _input(event):
