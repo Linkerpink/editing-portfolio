@@ -2,10 +2,10 @@
 
 [ext_resource type="Shader" uid="uid://hq238dkinu5i" path="res://shaders/liquid_glass.gdshader" id="1_gp127"]
 [ext_resource type="Theme" uid="uid://c3ardofqloevr" path="res://themes/theme.tres" id="2_fk303"]
+[ext_resource type="Script" uid="uid://du32awkgklu6g" path="res://scripts/video_ui.gd" id="2_s21ly"]
 [ext_resource type="Texture2D" uid="uid://cwme8u6ahw61y" path="res://icon.svg" id="3_fk303"]
 [ext_resource type="Script" uid="uid://cvycof07gx8ql" path="res://scripts/video_player.gd" id="3_xwjp2"]
 [ext_resource type="PackedScene" uid="uid://b85fu6ytk3oyy" path="res://scenes/wii_u_button.tscn" id="4_fk303"]
-[ext_resource type="Script" uid="uid://bvayikcetv7ao" path="res://scripts/wii_u_button.gd" id="6_xwjp2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c4fii"]
 shader = ExtResource("1_gp127")
@@ -39,10 +39,18 @@ shader_parameter/chromatic_strength = 5.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwkpx"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
+
+[sub_resource type="InputEventKey" id="InputEventKey_bhnt5"]
+device = -1
+keycode = 77
+unicode = 109
+
+[sub_resource type="Shortcut" id="Shortcut_s21ly"]
+events = [SubResource("InputEventKey_bhnt5")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_fk303"]
 device = -1
@@ -60,10 +68,18 @@ corner_radius_bottom_left = 32
 
 [sub_resource type="InputEventKey" id="InputEventKey_xwjp2"]
 device = -1
+keycode = 77
+unicode = 109
+
+[sub_resource type="Shortcut" id="Shortcut_xwjp2"]
+events = [SubResource("InputEventKey_xwjp2")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_s21ly"]
+device = -1
 keycode = 4194305
 
-[sub_resource type="Shortcut" id="Shortcut_s21ly"]
-events = [SubResource("InputEventKey_fk303"), SubResource("InputEventKey_xwjp2")]
+[sub_resource type="Shortcut" id="Shortcut_bhnt5"]
+events = [SubResource("InputEventKey_fk303"), SubResource("InputEventKey_s21ly")]
 
 [node name="VideoUI" type="Control" unique_id=309874892]
 layout_mode = 3
@@ -73,6 +89,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_fk303")
+script = ExtResource("2_s21ly")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=1370460024]
 material = SubResource("ShaderMaterial_c4fii")
@@ -105,10 +122,12 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2" unique_id=1346167110]
 custom_minimum_size = Vector2(0, 428)
 layout_mode = 2
+theme_override_constants/separation = 32
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer" unique_id=1094419685]
 custom_minimum_size = Vector2(0, 360)
@@ -128,10 +147,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
 [node name="Panel" type="Panel" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer" unique_id=1012537983]
 clip_children = 2
@@ -172,87 +191,131 @@ offset_right = 32.0
 offset_bottom = 32.0
 shader_material = null
 
-[node name="Timeline" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls" unique_id=699763820]
+[node name="BottomBar" type="Control" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls" unique_id=1519424391]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.031000001
-anchor_top = 1.0
-anchor_right = 0.882
-anchor_bottom = 1.0
-offset_left = -0.208004
-offset_top = -48.0
-offset_right = 0.18899536
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_constants/separation = 8
-
-[node name="VideoPosLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/Timeline" unique_id=2114839664]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 8
-text = "0:00/1:23"
-
-[node name="VideoPosSlider" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/Timeline" unique_id=1778899357]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 8
-step = 0.1
-
-[node name="FullscreenButton" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls" unique_id=1509840948 instance=ExtResource("4_fk303")]
-unique_name_in_owner = true
-material = null
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -48.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 0
+offset_top = -78.0
+grow_horizontal = 2
 grow_vertical = 0
-pivot_offset_ratio = Vector2(1, 1)
-shortcut = SubResource("Shortcut_0pda5")
-text = "FS"
-shader_material = null
 
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer" unique_id=1151104883]
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar" unique_id=885652594]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar" unique_id=1304703253]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VideoPosLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer" unique_id=2114839664]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "0:00/1:23"
 
-[node name="VideoInformation" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/MarginContainer" unique_id=1574015105]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer" unique_id=527768170]
 layout_mode = 2
-alignment = 1
+size_flags_horizontal = 3
+size_flags_vertical = 8
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/MarginContainer/VideoInformation" unique_id=233679733]
+[node name="VideoPosSlider" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer" unique_id=1778899357]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 32
-text = "Insane Video Title Idk"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 5
+size_flags_vertical = 4
+step = 0.1
 
-[node name="ChannelInfo" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/MarginContainer/VideoInformation" unique_id=1523373854]
-custom_minimum_size = Vector2(0, 56)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer" unique_id=645338623]
 layout_mode = 2
+size_flags_vertical = 8
+
+[node name="VolumeMixer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=730788678]
+layout_mode = 2
+
+[node name="MuteButton" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/HBoxContainer/VolumeMixer" unique_id=1509840948 instance=ExtResource("4_fk303")]
+unique_name_in_owner = true
+material = null
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+shortcut = SubResource("Shortcut_s21ly")
+text = "M"
+shader_material = null
+
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/HBoxContainer/VolumeMixer" unique_id=188488158]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.1
+
+[node name="FullscreenButton" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1228153550 instance=ExtResource("4_fk303")]
+unique_name_in_owner = true
+material = null
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+shortcut = SubResource("Shortcut_0pda5")
+text = "FS    "
+shader_material = null
+
+[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer" unique_id=719801244]
+layout_mode = 2
+ratio = 5.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2" unique_id=1115446346]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="VideoInformation" type="VBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2/HBoxContainer" unique_id=1574015105]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="ProfilePicture" type="Panel" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/MarginContainer/VideoInformation/ChannelInfo" unique_id=1900891214]
+[node name="TitleLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2/HBoxContainer/VideoInformation" unique_id=233679733]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Insane Video Title Idk"
+clip_text = true
+text_overrun_behavior = 5
+
+[node name="ChannelInfo" type="HBoxContainer" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2/HBoxContainer/VideoInformation" unique_id=1523373854]
+custom_minimum_size = Vector2(0, 56)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="ProfilePicture" type="Panel" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2/HBoxContainer/VideoInformation/ChannelInfo" unique_id=1900891214]
 clip_children = 2
 custom_minimum_size = Vector2(56, 0)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_fk303")
 
-[node name="ProfilePictureTextureRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/MarginContainer/VideoInformation/ChannelInfo/ProfilePicture" unique_id=1058872032]
+[node name="ProfilePictureTextureRect" type="TextureRect" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2/HBoxContainer/VideoInformation/ChannelInfo/ProfilePicture" unique_id=1058872032]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -263,19 +326,24 @@ grow_vertical = 2
 texture = ExtResource("3_fk303")
 expand_mode = 1
 
-[node name="ChannelLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/MarginContainer/VideoInformation/ChannelInfo" unique_id=1515115195]
+[node name="ChannelLabel" type="Label" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2/HBoxContainer/VideoInformation/ChannelInfo" unique_id=1515115195]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 21
 text = "@ChannnelName"
-vertical_alignment = 1
 clip_text = true
 text_overrun_behavior = 5
 
+[node name="ViewOnYoutubeButton" parent="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2/HBoxContainer" unique_id=501885400 instance=ExtResource("4_fk303")]
+material = null
+custom_minimum_size = Vector2(200, 112.5)
+layout_mode = 2
+text = "View On YouTube"
+shader_material = null
+
 [node name="FullscreenUI" type="Control" parent="." unique_id=301970943]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -284,6 +352,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="FullscreenUI" unique_id=668211859]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -326,62 +395,127 @@ offset_right = 32.0
 offset_bottom = 32.0
 shader_material = null
 
-[node name="FullscreenTimeline" type="HBoxContainer" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls" unique_id=632514525]
+[node name="FullscreenBottomBar" type="Control" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls" unique_id=547982834]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.031000001
+anchors_preset = 12
 anchor_top = 1.0
-anchor_right = 0.882
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -0.208004
-offset_top = -48.0
-offset_right = 0.18899536
+offset_top = -78.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_constants/separation = 8
 
-[node name="FullscreenVideoPosLabel" type="Label" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenTimeline" unique_id=1593680181]
+[node name="ColorRect" type="ColorRect" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar" unique_id=1776844537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.49803922)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar" unique_id=1455795660]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -52.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="FullscreenVideoPosLabel" type="Label" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer" unique_id=261868096]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(92, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "0:00/1:23"
 
-[node name="FullscreenVideoPosSlider" type="HSlider" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenTimeline" unique_id=916072603]
+[node name="VBoxContainer" type="VBoxContainer" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer" unique_id=1489786354]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+
+[node name="FullscreenVideoPosSlider" type="HSlider" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer" unique_id=1003315059]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
 step = 0.1
 
-[node name="FullscreenButtonFullscreen" type="Button" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls" unique_id=71619482]
+[node name="HBoxContainer" type="HBoxContainer" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer" unique_id=475165059]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="VolumeMixer" type="HBoxContainer" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=963227721]
+layout_mode = 2
+
+[node name="FullscreenMuteButton" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/HBoxContainer/VolumeMixer" unique_id=1591188961 instance=ExtResource("4_fk303")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -48.0
-offset_top = -48.0
-grow_horizontal = 0
-grow_vertical = 0
-pivot_offset_ratio = Vector2(1, 1)
-focus_mode = 0
-shortcut = SubResource("Shortcut_s21ly")
+material = null
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+shortcut = SubResource("Shortcut_xwjp2")
+text = "M"
+shader_material = null
+
+[node name="FullscreenVolumeSlider" type="HSlider" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/HBoxContainer/VolumeMixer" unique_id=1241589469]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.1
+
+[node name="FullscreenFullscreenFullscreenButton" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1782946718 instance=ExtResource("4_fk303")]
+unique_name_in_owner = true
+material = null
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 10
+shortcut = SubResource("Shortcut_bhnt5")
 text = "FS"
-script = ExtResource("6_xwjp2")
+shader_material = null
+
+[node name="MarginContainer" type="MarginContainer" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls" unique_id=1392308092]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+
+[node name="FullscreenTitleLabel" type="Label" parent="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/MarginContainer" unique_id=870714440]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.49803922)
+theme_override_constants/shadow_offset_x = -2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "Insane Video Title Idk"
+clip_text = true
+text_overrun_behavior = 5
 
 [connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_pause"]
 [connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/PauseButton" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_pause"]
-[connection signal="drag_ended" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/Timeline/VideoPosSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_video_pos_slider_drag_ended"]
-[connection signal="drag_started" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/Timeline/VideoPosSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_video_pos_slider_drag_started"]
-[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/FullscreenButton" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_set_fullscreen" binds= [true]]
+[connection signal="drag_ended" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/VideoPosSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_video_pos_slider_drag_ended"]
+[connection signal="drag_started" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/VideoPosSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_video_pos_slider_drag_started"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/HBoxContainer/VolumeMixer/MuteButton" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_mute_button_pressed"]
+[connection signal="value_changed" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/HBoxContainer/VolumeMixer/VolumeSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_change_volume"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer/MarginContainer/Panel/VideoPlayerControls/BottomBar/HBoxContainer/VBoxContainer/HBoxContainer/FullscreenButton" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_set_fullscreen" binds= [true]]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer2/HBoxContainer/ViewOnYoutubeButton" to="." method="_on_view_on_youtube_button_pressed"]
 [connection signal="pressed" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_pause"]
 [connection signal="pressed" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenPauseButton" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_pause"]
-[connection signal="drag_ended" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenTimeline/FullscreenVideoPosSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_video_pos_slider_drag_ended"]
-[connection signal="drag_started" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenTimeline/FullscreenVideoPosSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_video_pos_slider_drag_started"]
-[connection signal="mouse_entered" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenButtonFullscreen" to="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenButtonFullscreen" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenButtonFullscreen" to="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenButtonFullscreen" method="_on_mouse_exited"]
-[connection signal="pressed" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenButtonFullscreen" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_set_fullscreen" binds= [false]]
+[connection signal="drag_ended" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/FullscreenVideoPosSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_video_pos_slider_drag_ended"]
+[connection signal="drag_started" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/FullscreenVideoPosSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_video_pos_slider_drag_started"]
+[connection signal="pressed" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/HBoxContainer/VolumeMixer/FullscreenMuteButton" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_on_mute_button_pressed"]
+[connection signal="value_changed" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/HBoxContainer/VolumeMixer/FullscreenVolumeSlider" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_change_volume"]
+[connection signal="pressed" from="FullscreenUI/AspectRatioContainer/FullscreenVideoPlayerControls/FullscreenBottomBar/HBoxContainer/VBoxContainer/HBoxContainer/FullscreenFullscreenFullscreenButton" to="MarginContainer/ScrollContainer/VBoxContainer2/VBoxContainer/AspectRatioContainer/VideoPlayer" method="_set_fullscreen" binds= [false]]

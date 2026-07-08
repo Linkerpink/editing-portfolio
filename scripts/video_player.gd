@@ -2,13 +2,11 @@ extends Panel
 
 @onready var video_stream_player : VideoStreamPlayer = %VideoStreamPlayer
 @onready var pause_button : Button = %PauseButton
-@onready var timeline : HBoxContainer = %Timeline
+@onready var bottom_bar: Control = %BottomBar
+@onready var mute_button: Button = %MuteButton
+@onready var volume_slider: HSlider = %VolumeSlider
 @onready var video_pos_slider : Slider = %VideoPosSlider
 @onready var video_pos_label : Label = %VideoPosLabel
-
-@onready var title_label : Label = %TitleLabel
-@onready var profile_picture_texture_rect: TextureRect = %ProfilePictureTextureRect
-@onready var channel_label: Label = %ChannelLabel
 
 @onready var fullscreen_button : Button = %FullscreenButton
 @onready var fullscreen_ui : Control = %FullscreenUI
@@ -16,13 +14,21 @@ extends Panel
 @onready var fullscreen_pause_button : Button = %FullscreenPauseButton
 @onready var fullscreen_video_pos_label : Label = %FullscreenVideoPosLabel
 @onready var fullscreen_video_pos_slider: HSlider = %FullscreenVideoPosSlider
-@onready var fullscreen_fullscreen_button: Button = %FullscreenButtonFullscreen
-@onready var fullscreen_timeline: HBoxContainer = %FullscreenTimeline
+@onready var fullscreen_fullscreen_button: Button = %FullscreenFullscreenFullscreenButton
+@onready var fullscreen_bottom_bar: Control = %FullscreenBottomBar
+@onready var fullscreen_volume_slider: HSlider = %FullscreenVolumeSlider
+@onready var fullscreen_title_label: Label = %FullscreenTitleLabel
+
+@onready var title_label : Label = %TitleLabel
+@onready var profile_picture_texture_rect: TextureRect = %ProfilePictureTextureRect
+@onready var channel_label: Label = %ChannelLabel
 
 var main : Main
 var animation_length : float = 0.125
 var hovering : bool = false
 var pausing : bool = false
+var muted : bool = false
+var last_volume : float = 1.0
 var fullscreen : bool = false
 var dragging_video_slider : bool = false
 
@@ -42,7 +48,6 @@ func _ready() -> void:
 
 
 func _process(delta : float):
-	print(fullscreen_mouse_timer)
 	if Input.is_action_just_pressed("pause"):
 		_pause()
 	
@@ -79,6 +84,7 @@ func _initialize():
 		_pause()
 	video_stream_player.stream = Globals.current_video.video_stream
 	title_label.text = Globals.current_video.title
+	fullscreen_title_label.text = Globals.current_video.title
 	profile_picture_texture_rect.texture = Globals.current_video.profile_picture
 	channel_label.text = Globals.current_video.channel_handle
 	
@@ -86,6 +92,7 @@ func _initialize():
 	video_stream_player.play()
 	video_pos_slider.max_value = video_stream_player.get_stream_length()
 	fullscreen_video_pos_slider.max_value = fullscreen_video_stream_player.get_stream_length()
+	_change_volume(1)
 
 
 func _stop_playing():
@@ -130,32 +137,26 @@ func _set_hovering(value : bool) -> void:
 	
 	if fullscreen:
 		if hovering:
-			var _fs_button_tween = create_tween()
-			_fs_button_tween.tween_property(fullscreen_fullscreen_button, "modulate:a", 1, animation_length)
+			var _bottom_bar_tween = create_tween()
+			_bottom_bar_tween.tween_property(fullscreen_bottom_bar, "modulate:a", 1, animation_length)
 			
-			var _timeline_tween = create_tween()
-			_timeline_tween.tween_property(fullscreen_timeline, "modulate:a", 1, animation_length)
+			var _title_label_tween = create_tween()
+			_title_label_tween.tween_property(fullscreen_title_label, "modulate:a", 1, animation_length)
 		else:
-			var _fs_button_tween = create_tween()
-			_fs_button_tween.tween_property(fullscreen_fullscreen_button, "modulate:a", 0, animation_length)
-			
 			if not dragging_video_slider:
-				var _timeline_tween = create_tween()
-				_timeline_tween.tween_property(fullscreen_timeline, "modulate:a", 0, animation_length)
+				var _bottom_bar_tween = create_tween()
+				_bottom_bar_tween.tween_property(fullscreen_bottom_bar, "modulate:a", 0, animation_length)
+				
+				var _title_label_tween = create_tween()
+				_title_label_tween.tween_property(fullscreen_title_label, "modulate:a", 0, animation_length)
 	else:
 		if hovering:
-			var _fs_button_tween = create_tween()
-			_fs_button_tween.tween_property(fullscreen_button, "modulate:a", 1, animation_length)
-			
-			var _timeline_tween = create_tween()
-			_timeline_tween.tween_property(timeline, "modulate:a", 1, animation_length)
+			var _bottom_bar_tween = create_tween()
+			_bottom_bar_tween.tween_property(bottom_bar, "modulate:a", 1, animation_length)
 		else:
-			var _fs_button_tween = create_tween()
-			_fs_button_tween.tween_property(fullscreen_button, "modulate:a", 0, animation_length)
-			
 			if not dragging_video_slider:
-				var _timeline_tween = create_tween()
-				_timeline_tween.tween_property(timeline, "modulate:a", 0, animation_length)
+				var _bottom_bar_tween = create_tween()
+				_bottom_bar_tween.tween_property(bottom_bar, "modulate:a", 0, animation_length)
 		
 
 
@@ -170,6 +171,28 @@ func _on_video_pos_slider_drag_ended(_value_changed: bool) -> void:
 	else:
 		video_stream_player.stream_position = video_pos_slider.value
 		dragging_video_slider = false
+
+
+func _change_volume(value: float) -> void:
+	if value > 0:
+		last_volume = value
+	
+	if fullscreen:
+		fullscreen_video_stream_player.volume = value
+	else:
+		video_stream_player.volume = value
+	
+	volume_slider.value = value
+	fullscreen_volume_slider.value = value
+
+
+func _on_mute_button_pressed() -> void:
+	if muted:
+		muted = false
+		_change_volume(last_volume)
+	else:
+		muted = true
+		_change_volume(0)
 
 
 func _set_fullscreen(value : bool) -> void:

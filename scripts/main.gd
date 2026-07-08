@@ -40,7 +40,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	print(get_viewport().size.y)
 	_handle_input()
 	_handle_camera(delta)
 	_handle_resize()
